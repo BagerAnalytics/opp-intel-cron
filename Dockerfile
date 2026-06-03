@@ -1,3 +1,5 @@
 FROM alpine:3.19
 RUN apk add --no-cache curl
-CMD sh -c 'curl -sf -X POST $APP_URL/cron/scrape -H "X-Cron-Secret: $CRON_SECRET"'
+COPY cron/run.sh /run.sh
+RUN chmod +x /run.sh
+CMD ["/run.sh"]
